@@ -1,4 +1,4 @@
-const baseFetchUrl = 'http://localhost:3000/api/v1'
+const baseUrl = 'http://localhost:3000/api/v1'
 
 function getHeaders() {
   const token = localStorage.getItem('token');
@@ -9,6 +9,15 @@ function getHeaders() {
     Authorization: token
   };
   return headers
+}
+
+const signup = (username, password, age) => {
+  const newUser = {method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({username, password, age})
+  }
+  return fetch('http://localhost:3000/api/v1/users', newUser)
+  .then(res => res.json());
 }
 
 const login = (username, password) => {
@@ -28,6 +37,7 @@ const getCurrentUser = () => {
 export default {
   auth: {
     login,
+    signup,
     getCurrentUser
   }
 };
