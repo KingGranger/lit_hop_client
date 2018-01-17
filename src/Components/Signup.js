@@ -16,12 +16,12 @@ class Signup extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.createUser(this.state)
+    this.props.createUser(this.state, this.props.history)
   }
 
 
   render(){
-    console.log('state: ', this.state)
+    // console.log('state: ', this.state)
     const { errors, isLoading, username, age, password } = this.state
     return (
       <div>

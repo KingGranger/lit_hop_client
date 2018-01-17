@@ -34,10 +34,20 @@ const getCurrentUser = () => {
   }).then(res => res.json());
 };
 
+const sendLocation = (lat, lng) => {
+    return fetch(`${baseUrl}/locations`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({ lat, lng })
+  })
+  .then(res => res.json());
+}
+
 export default {
   auth: {
     login,
     signup,
-    getCurrentUser
+    getCurrentUser,
+    sendLocation
   }
 };

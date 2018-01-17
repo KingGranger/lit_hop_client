@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css'
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import Login from './Components/Login'
 import Signup from './Components/Signup'
@@ -10,17 +11,19 @@ import * as actions from './actions/index'
 
 class App extends Component {
 
-  componentDidMount = () => {
-    if (localStorage.getItem('token')){
-      this.props.fetchUser()
-    }
-  }
+  // componentDidMount = () => {
+  //   if (localStorage.getItem('token')){
+  //     this.props.fetchUser()
+  //   }
+  // }
 
   render() {
-    console.log('my props: ',this.props)
     return (
-      <div className="App">
-        <NavBar />
+      <div className="App" >
+        <NavBar logout={this.props.logoutUser}
+          history={this.props.history}
+          loggedIn={this.props.loggedIn}
+          username={this.props.auth.currentUser.username}/>
 
         <Switch>
           <Route exact path='/' />
@@ -28,7 +31,7 @@ class App extends Component {
           <Route path='/Signup' component={Signup}/>
           <Route path='/home' component={Home}/>
         </Switch>
-        <Home />
+
       </div>
     );
   }

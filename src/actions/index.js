@@ -40,3 +40,8 @@ export const logoutUser = (history) => {
   history.replace('/')
   return { type: 'LOGOUT_USER' };
 };
+
+export const setLocation = (lat, lng) => {
+  api.auth.sendLocation(lat, lng).then(data => console.log('backend bar data:', data))
+  return {type: 'SET_LOCATION', payload: {lat, lng}};
+}
