@@ -15,15 +15,17 @@ export const MyMapComponent = compose(
   withGoogleMap
   )((props) =>  {
       return (<GoogleMap
-    defaultZoom={14}
+    defaultZoom={15}
     center={props.position}
   >
     <Marker
+      icon={{ url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' }}
       position={props.position}
       onClick={props.onToggleOpen}
     >
-      {props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen}>
-      </InfoWindow>}
     </Marker>
+    {props.bars.map(bar => <Marker
+      key={bar.place_id}
+      position={{lat: bar.lat, lng: bar.lng}}/>)}
   </GoogleMap>)}
 );

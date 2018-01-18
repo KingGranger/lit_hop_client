@@ -1,19 +1,23 @@
 import React from 'react';
-import { List, Segment, Header, Modal, Icon } from 'semantic-ui-react';
+import { List, Segment, Header, Modal, Icon, Card, Button } from 'semantic-ui-react';
 
-const BarList = () => {
-  const tripPlaces = ['bar 1', 'bar 2', 'bar 3']
+
+
+const BarList = ({bars, showInfo, toggleInfo, currentBar}) => {
 
   return(
-    <Segment raised>
+    <Segment raised style={{height: `500px`, overflow: 'scroll'}} >
       <Header as='h3'><Icon name='thermometer three quarters'/></Header>
-      <List ordered>
-        {tripPlaces.map(bar => {
-          return <Modal trigger={<List.Item>{bar}</List.Item>}>
-            <Modal.Content>hey this is {bar}</Modal.Content>
-          </Modal>
-        })}
-      </List>
+      {!showInfo ? <List ordered>
+        {bars.map(bar => {
+          return  <Segment key={bar.place_id}>
+                    <List.Item key={bar.place_id} onClick={() => toggleInfo(bar.id)}>{bar.name}</List.Item>
+                  </Segment>})}
+      </List> :
+      <div>
+        {bars.find(bar => bar.id === currentBar).name}
+        <Button onClick={() => toggleInfo(0)}>Show list</Button>
+      </div>}
     </Segment>
   )
 };

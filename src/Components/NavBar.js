@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 const NavBar = ({logout, history, loggedIn, username}) => {
 
   return(
-      <Navbar brand='Lit Hop' className='orange darken-3' right>
+      <Navbar brand='Lit Hop' className='orange darken-3' right fixed>
         {!loggedIn? <NavItem >
           <NavLink to='/'>Lit Hop</NavLink>
         </NavItem>: null}

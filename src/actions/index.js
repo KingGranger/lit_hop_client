@@ -42,6 +42,17 @@ export const logoutUser = (history) => {
 };
 
 export const setLocation = (lat, lng) => {
-  api.auth.sendLocation(lat, lng).then(data => console.log('backend bar data:', data))
-  return {type: 'SET_LOCATION', payload: {lat, lng}};
+  return dispatch => {
+    dispatch({type: 'SET_LOCATION', payload: { lat, lng }});
+    api.auth.sendLocation(lat, lng).then(data => {
+    dispatch(setBars(data))
+  })}
+}
+
+export const setBars = (bars) => {
+  return {type: 'SET_BARS', payload: bars}
+}
+
+export const setInfo = (Id) => {
+  return {type: 'SHOW_INFO', payload: Id}
 }

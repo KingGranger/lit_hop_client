@@ -25,8 +25,13 @@ class Home extends Component {
 
   }
 
+  toggleInfo = (Id) => {
+    this.props.setInfo(Id)
+  }
+
   render(){
     console.log('home props', this.props)
+
     return(
       <div className='row'>
         <Segment inverted color='red'>
@@ -35,8 +40,13 @@ class Home extends Component {
             <Col s={4}><BarFilter /></Col>
           </Row>
           <Row>
-            <Col s={6}><BarList /></Col>
+            <Col s={6} ><BarList
+              currentBar={this.props.currentBarId.currentBarId}
+              toggleInfo={this.toggleInfo}
+              showInfo={this.props.showInfo.showInfo}
+              bars={this.props.bars.bars? this.props.bars.bars : []}/></Col>
             <Col s={6}><MyMapComponent
+              bars={this.props.bars.bars? this.props.bars.bars : []}
               position={this.props.position}
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQh-ANCsLGqwp1ETq1eSj55pUo0Rd48dg&v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: `100%` }} />}
@@ -56,10 +66,6 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
-  // const currentLocation = {
-  //   lat: '',
-  //   lng: ''
-  // }
 
   return {...state}
 }
