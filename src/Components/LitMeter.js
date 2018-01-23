@@ -5,7 +5,7 @@ const LitMeter = () => {
 
   return(
     <Segment >
-      <Progress value='5' total='10' inverted size='medium' color='red' progress='percent'>Lit Meter</Progress>
+      <Progress  percent={45} progress>Lit Meter</Progress>
     </Segment>
   )
 };

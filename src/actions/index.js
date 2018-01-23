@@ -56,3 +56,29 @@ export const setBars = (bars) => {
 export const setInfo = (Id) => {
   return {type: 'SHOW_INFO', payload: Id}
 }
+
+export const addBar = (bar) => {
+  return {type: 'ADD_BAR', payload: bar}
+}
+
+export const removeBar = (Id) => {
+    return {type: 'REMOVE_BAR', payload: Id}
+}
+
+export const setJourney = (start, end, trips) => {
+  return dispatch => {
+    api.auth.createJourney(start, end, trips).then(data => console.log(data))
+  }
+}
+
+const setTrips = (journey, trips) => {
+  return {type: 'SET_TRIPS', payload: trips}
+}
+
+export const setFilter = (filters, bars) => {
+  return {type: 'FILTER_BARS', payload: {filters, bars}}
+}
+
+export const beginJourney = () => {
+  return {type: 'START_JOURNEY'}
+}

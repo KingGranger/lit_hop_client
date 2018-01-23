@@ -24,8 +24,12 @@ export const MyMapComponent = compose(
       onClick={props.onToggleOpen}
     >
     </Marker>
-    {props.bars.map(bar => <Marker
+    {!props.showInfo ? props.bars.map(bar => <Marker
       key={bar.place_id}
+      position={{lat: bar.lat, lng: bar.lng}}
+      onClick={()=> props.toggleInfo(bar.id)}/>) :
+    props.bars.filter(bar => bar.id === props.currentBar).map(bar => <Marker
+      icon={{ url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' }}
       position={{lat: bar.lat, lng: bar.lng}}/>)}
   </GoogleMap>)}
 );

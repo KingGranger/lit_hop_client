@@ -35,7 +35,7 @@ const getCurrentUser = () => {
 };
 
 const sendLocation = (lat, lng) => {
-    return fetch(`${baseUrl}/locations`, {
+    return fetch(`${baseUrl}/bars`, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify({ lat, lng })
@@ -43,11 +43,20 @@ const sendLocation = (lat, lng) => {
   .then(res => res.json());
 }
 
+const createJourney = (start, end, trips) => {
+  return fetch(`${baseUrl}/journeys`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({ start_location: start, end_location: end, trips: trips })
+  }).then(res => res.json());
+}
+
 export default {
   auth: {
     login,
     signup,
     getCurrentUser,
-    sendLocation
+    sendLocation,
+    createJourney
   }
 };

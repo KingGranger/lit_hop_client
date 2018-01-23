@@ -2,9 +2,12 @@ import { combineReducers } from 'redux';
 
 const initialState = { currentUser: {} };
 const initialLocation = {lat: 0, lng: 0}
-const initialBars = []
+const initialBars = {bars: []}
 const intialInfo = {showInfo: false}
-const initialBarId = { currentBarId: 0 }
+const initialBarId = 0
+const initialTrips = []
+const initialTripStart = false
+const initialFilter = []
 
 const authUserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -35,6 +38,22 @@ const barsReducer = (state = initialBars, action) => {
   }
 }
 
+const filterReducer = (state = initialFilter, action) => {
+  switch (action.type){
+    case 'FILTER_BARS':
+      const newBars = action.payload.bars.filter(bar => {
+        for(let i = 0; i < action.payload.filters.length; i++){
+          if(bar.types.includes(action.payload.filters[i])){
+            return true;
+          }
+        }
+      })
+      return newBars;
+    default:
+      return state;
+  }
+}
+
 const infoReducer = (state = intialInfo, action) => {
   switch (action.type){
     case 'SHOW_INFO':
@@ -47,20 +66,43 @@ const infoReducer = (state = intialInfo, action) => {
 const barIdReducer = (state = initialBarId, action) => {
   switch (action.type) {
     case 'SHOW_INFO':
-      return {...state, currentBarId: action.payload}
+      return action.payload
     default:
       return state;
   }
 
 }
 
+const tripReducer = (state = initialTrips, action) => {
+  switch (action.type){
+    case 'ADD_BAR':
+      return state.concat(action.payload)
+    case 'REMOVE_BAR':
+      const barToRemove = state.findIndex(bar => bar.id === action.payload)
+      return  [...state.slice(0, barToRemove), ...state.slice(barToRemove + 1)]
+    default:
+      return state
+  }
+}
+
+const journeyReducer = (state = initialTripStart, action) => {
+  switch (action.type){
+    case 'START_JOURNEY':
+    return !state
+  default:
+    return state
+  }
+}
 
 const rootReducer = combineReducers({
   auth: authUserReducer,
   position: locationReducer,
   bars: barsReducer,
   showInfo: infoReducer,
-  currentBarId: barIdReducer
+  currentBarId: barIdReducer,
+  trips: tripReducer,
+  filteredBars: filterReducer,
+  onJourney: journeyReducer
 })
 
 export default rootReducer;
