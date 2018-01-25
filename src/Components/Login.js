@@ -1,20 +1,26 @@
 import React, { Component } from 'react'
-import { Form, Button, Segment, Icon, Container } from 'semantic-ui-react';
+import { Form, Button, Segment, Icon, Container, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class Login extends Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    error: ''
   }
 
   handleChange = (e) => {this.setState({[e.target.name]: e.target.value})}
 
   handleSubmit = (e) =>{
     e.preventDefault()
-    this.props.loginUser(this.state, this.props.history)
+    if(this.state.username !== ''  && this.state.password !== ''){
+      this.props.loginUser(this.state, this.props.history)
+    } else {
+      this.setState({error: 'Please fill in all fields'})
+    }
   }
+
   render(){
     return(
       <div>
@@ -29,6 +35,7 @@ class Login extends Component {
                 <label>Password</label>
                 <input placeholder='Password' type='password' name='password' value={this.state.password} onChange={this.handleChange}/>
               </Form.Field>
+              {this.state.error !== '' ? <Message header={this.state.error} icon='cancel' size='tiny' color='yellow'/>  : null}
               <Form.Field>
                 <Button type='submit' animated='fade' color='blue'>
                   <Button.Content visible>Log In!</Button.Content>

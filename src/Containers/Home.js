@@ -11,6 +11,7 @@ import * as actions from '../actions';
 import TripContainer from '../Containers/TripContainer';
 import api from '../AuthAdapter/api';
 import { JourneyMap } from '../Components/JourneyMap';
+import Directions from '../Components/Directions';
 
 
 class Home extends Component {
@@ -37,15 +38,19 @@ class Home extends Component {
       // z = _.intersection(arr1, arr2)
   }
 
+  restart = () => {
+    this.props.restartTrip()
+  }
+
   render(){
-    // console.log('home props', this.props)
+    //console.log('home props', this.props)
 
     return(
       <div className='row'>
         <Segment inverted color='red'>
           <Row>
-            <Col s={8}><TripContainer /></Col>
-            <Col s={4}><BarFilter
+            <Col s={12} m={8}><TripContainer /></Col>
+            <Col s={12} m={4}><BarFilter
               bars={this.props.bars.bars? this.props.bars.bars : []}
               filterBars={this.filterBars}/></Col>
           </Row>
@@ -56,7 +61,11 @@ class Home extends Component {
               toggleInfo={this.toggleInfo}
               showInfo={this.props.showInfo.showInfo}
               bars={this.props.bars.bars? this.props.bars.bars : []}
-              filteredBars={this.props.filteredBars}/> :null}</Col>
+              filteredBars={this.props.filteredBars}/> :
+              <Directions
+                onJourney={this.props.onJourney}
+                restart={this.restart}
+                trips={this.props.trips}/>}</Col>
             <Col s={6}>{!this.props.onJourney ? <MyMapComponent
               currentBar={this.props.currentBarId}
               toggleInfo={this.toggleInfo}
@@ -67,12 +76,15 @@ class Home extends Component {
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{height: `500px`}}/>}
               mapElement={<div style={{height: `100%`, width: `100%`}}/>}
-              /> : <JourneyMap />}
+              /> : <JourneyMap
+              trips={this.props.trips}
+              startPosition={this.props.position}/>}
             </Col>
           </Row>
           <Row>
             <Col s={1}/>
-            <Col s={10}><LitMeter/></Col>
+            <Col s={10}><LitMeter
+              trips={this.props.trips}/></Col>
             <Col s={1}/>
           </Row>
         </Segment>

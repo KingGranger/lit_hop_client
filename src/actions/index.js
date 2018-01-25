@@ -79,6 +79,14 @@ export const setFilter = (filters, bars) => {
   return {type: 'FILTER_BARS', payload: {filters, bars}}
 }
 
-export const beginJourney = () => {
-  return {type: 'START_JOURNEY'}
+export const beginJourney = (startPosition) => {
+  return {type: 'START_JOURNEY', payload: startPosition}
+}
+
+export const nextStop = () => {
+  return {type: 'NEXT_STOP'}
+}
+
+export const restartTrip = () => {
+  return {type: 'RESTART'}
 }

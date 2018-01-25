@@ -80,6 +80,12 @@ const tripReducer = (state = initialTrips, action) => {
     case 'REMOVE_BAR':
       const barToRemove = state.findIndex(bar => bar.id === action.payload)
       return  [...state.slice(0, barToRemove), ...state.slice(barToRemove + 1)]
+    case 'START_JOURNEY':
+        return [action.payload, ...state]
+    case 'NEXT_STOP':
+      return state.slice(1,state.length)
+    case 'RESTART':
+      return []
     default:
       return state
   }
@@ -88,9 +94,11 @@ const tripReducer = (state = initialTrips, action) => {
 const journeyReducer = (state = initialTripStart, action) => {
   switch (action.type){
     case 'START_JOURNEY':
-    return !state
-  default:
-    return state
+      return !state;
+    case 'RESTART':
+      return !state;
+    default:
+      return state
   }
 }
 

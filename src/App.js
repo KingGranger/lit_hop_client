@@ -7,6 +7,7 @@ import NavBar from './Components/NavBar'
 import { connect } from 'react-redux';
 import Home from './Containers/Home'
 import * as actions from './actions/index'
+import LandingPage from './Components/LandingPage';
 
 
 class App extends Component {
@@ -25,8 +26,9 @@ class App extends Component {
           loggedIn={this.props.loggedIn}
           username={this.props.auth.currentUser.username}/>
 
+
         <Switch>
-          <Route exact path='/' />
+          <Route exact path='/' component={LandingPage}/>
           <Route path='/Login' component={Login}/>
           <Route path='/Signup' component={Signup}/>
           <Route path='/home' component={Home}/>

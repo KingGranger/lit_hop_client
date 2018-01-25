@@ -4,8 +4,8 @@ import { Progress, Segment } from 'semantic-ui-react';
 const LitMeter = () => {
 
   return(
-    <Segment >
-      <Progress  percent={45} progress>Lit Meter</Progress>
+    <Segment inverted>
+      <Progress percent={29} inverted color='pink' progress />
     </Segment>
   )
 };

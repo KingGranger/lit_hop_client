@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Segment, Icon, Container } from 'semantic-ui-react';
+import { Form, Button, Segment, Icon, Container, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -8,7 +8,7 @@ class Signup extends Component {
     username: '',
     age: '',
     password: '',
-    // errors: {},
+    errors: ''
     // isLoading: false
   }
 
@@ -16,7 +16,11 @@ class Signup extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.createUser(this.state, this.props.history)
+    if(this.state.username !== '' && this.state.age !== '' && this.state.password){
+      this.props.createUser(this.state, this.props.history)
+    } else {
+      this.setState({error: 'Please fill in all fields'})
+    }
   }
 
 
@@ -40,6 +44,7 @@ class Signup extends Component {
                 <label>Password</label>
                 <input type='password' placeholder='password' name='password' value={password} onChange={this.handleChange} />
               </Form.Field>
+              {this.state.error !== '' ? <Message header={this.state.error} icon='cancel' size='tiny' color='yellow'/>  : null}
               <Form.Field>
                 <Button type='submit' animated='fade' color='blue' disabled={isLoading}>
                   <Button.Content visible>Sign Up!</Button.Content>

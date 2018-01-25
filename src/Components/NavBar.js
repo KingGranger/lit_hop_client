@@ -18,7 +18,7 @@ const NavBar = ({logout, history, loggedIn, username}) => {
         </NavItem> : null}
         {!loggedIn ? <NavItem >
           <NavLink to='/Signup'>
-            <Icon>grade</Icon>
+            <Icon>person_add</Icon>
           </NavLink>
         </NavItem>: null}
         {loggedIn ?

@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Segment, Header, Icon, Card, Button } from 'semantic-ui-react';
+import { List, Segment, Header, Icon, Card, Button, Dimmer, Loader } from 'semantic-ui-react';
 
 
 
@@ -7,9 +7,12 @@ const BarList = ({bars, showInfo, toggleInfo, currentBar, addBarToTrip, filtered
 
   return(
     <Segment raised style={{height: `500px`, overflowY: 'scroll'}} >
-      <Header as='h3'><Icon name='thermometer three quarters'/></Header>
+      <Header as='h3'><Icon name='thermometer empty'/></Header>
       {!showInfo ? <List ordered>
-        {filteredBars.length === 0 ? bars.map(bar => {
+        {bars.length === 0 ? <Dimmer active inverted style={{marginTop: `50px`}}>
+                                <Loader>Loading</Loader>
+                              </Dimmer> :
+          filteredBars.length === 0 ? bars.map(bar => {
           return  <Segment key={bar.place_id}>
                     <List.Item key={bar.place_id} onClick={() => toggleInfo(bar.id)}>{bar.name}</List.Item>
                   </Segment>}):
