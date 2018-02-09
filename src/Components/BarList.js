@@ -1,48 +1,67 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { List, Segment, Header, Icon, Card, Button, Dimmer, Loader } from 'semantic-ui-react';
+import BarCard from './BarCard'
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+import api from '../AuthAdapter/api';
 
 
+const testBars = [{name: 'bar home', id: 1}, {name: 'bar away', id: 2}, {name: 'bar there', id: 3}]
+class BarList extends Component{
 
-const BarList = ({bars, showInfo, toggleInfo, currentBar, addBarToTrip, filteredBars}) => {
 
-  return(
-    <Segment raised style={{height: `500px`, overflowY: 'scroll'}} >
-      <Header as='h3'><Icon name='thermometer empty'/></Header>
-      {!showInfo ? <List ordered>
-        {bars.length === 0 ? <Dimmer active inverted style={{marginTop: `50px`}}>
-                                <Loader>Loading</Loader>
-                              </Dimmer> :
-          filteredBars.length === 0 ? bars.map(bar => {
-          return  <Segment key={bar.place_id}>
-                    <List.Item key={bar.place_id} onClick={() => toggleInfo(bar.id)}>{bar.name}</List.Item>
-                  </Segment>}):
-                filteredBars.map(bar => {
-                  return  <Segment key={bar.place_id}>
-                            <List.Item key={bar.place_id} onClick={() => toggleInfo(bar.id)}>{bar.name}</List.Item>
-                          </Segment>}) }
-      </List> :
-      <Card centered raised>
-        <Card.Content>
-          <Card.Header>{bars.find(bar => bar.id === currentBar).name}</Card.Header>
-          <Card.Description as='h4'>
-            <Icon name='address book'/>{bars.find(bar => bar.id === currentBar).address}
-          </Card.Description>
-          <Card.Description as='h5'>
-            <Icon name='money'/>Price Level: {bars.find(bar => bar.id === currentBar).price_level}
-          </Card.Description>
-          <Card.Description as='h5'>
-            <Icon name='star half empty'/>Rating: {bars.find(bar => bar.id === currentBar).rating}
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <div className='ui two buttons'>
-            <Button basic color='green' onClick={() => addBarToTrip(bars.find(bar => bar.id === currentBar))}><Icon name='add'/>Add to Trip!</Button>
-            <Button basic color='red' onClick={() => toggleInfo(0)}><Icon name='list'/>Show list</Button>
-          </div>
-        </Card.Content>
-      </Card>}
-    </Segment>
-  )
+  toggleInfo = (Id) => {
+    console.log('clicked')
+    //this.props.setInfo(Id)
+  }
+
+  addBarToTrip = (bar) => {
+    this.props.addBar(bar)
+    this.props.setInfo(0)
+  }
+
+  filterBars = (e, filter) => {
+      this.props.setFilter(filter.value, this.props.bars.bars)
+      // z = _.intersection(arr1, arr2)
+  }
+
+  listOfBars = () =>{
+    return this.props.bars.bars? this.props.bars.bars : []
+  }
+
+  render(){
+    console.log('Bar list props', this.props)
+    return(
+      <Segment raised style={{height: `500px`, overflowY: 'scroll'}} >
+        <Header as='h3'><Icon name='thermometer empty'/></Header>
+        <List>
+          {testBars.map(bar => <Segment><List.Item onClick={() => this.toggleInfo(bar.id)}>
+            {bar.name}
+          </List.Item></Segment>)}
+        </List>
+      </Segment>
+    )
+  }
 };
 
-export default BarList;
+const mapStateToProps = state => {
+
+  return {...state}
+}
+
+export default connect(mapStateToProps,actions)(BarList);
+
+// {!this.props.showInfo.showInfo ? <List ordered>
+//   {this.listOfBars().length === 0 ? <Dimmer active inverted style={{marginTop: `50px`}}>
+//   <Loader>Loading</Loader>
+// </Dimmer> :
+// this.filteredBars.length === 0 ? this.bars.map(bar => {
+//   return  <Segment key={bar.place_id}>
+//     <List.Item key={bar.place_id} onClick={() => this.toggleInfo(bar.id)}>{bar.name}</List.Item>
+//   </Segment>}):
+//   this.filteredBars.map(bar => {
+//     return  <Segment key={bar.place_id}>
+//       <List.Item key={bar.place_id} onClick={() => this.toggleInfo(bar.id)}>{bar.name}</List.Item>
+//     </Segment>}) }
+//   </List> :
+//   <BarCard/>}

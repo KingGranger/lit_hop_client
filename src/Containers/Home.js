@@ -16,34 +16,21 @@ import Directions from '../Components/Directions';
 
 class Home extends Component {
 
-  componentDidMount = () => {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          this.props.setLocation(position.coords.latitude, position.coords.longitude)
-        });
-    }
-  }
+  // componentDidMount = () => {
+  //   if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition((position) => {
+  //         this.props.setLocation(position.coords.latitude, position.coords.longitude)
+  //       });
+  //   }
+  // }
 
-  toggleInfo = (Id) => {
-    this.props.setInfo(Id)
-  }
-
-  addBarToTrip = (bar) => {
-    this.props.addBar(bar)
-    this.props.setInfo(0)
-  }
-
-  filterBars = (e, filter) => {
-      this.props.setFilter(filter.value, this.props.bars.bars)
-      // z = _.intersection(arr1, arr2)
-  }
 
   restart = () => {
     this.props.restartTrip()
   }
 
   render(){
-    //console.log('home props', this.props)
+    console.log('home props', this.props)
 
     return(
       <div className='row'>
