@@ -51,12 +51,21 @@ const createJourney = (start, end, trips) => {
   }).then(res => res.json());
 }
 
+const createReview = (title, content) => {
+  return fetch(`${baseUrl}/reviews`,{
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({ title, content})
+  }).then(res => res.json());
+}
+
 export default {
   auth: {
     login,
     signup,
     getCurrentUser,
     sendLocation,
-    createJourney
+    createJourney,
+    createReview
   }
 };

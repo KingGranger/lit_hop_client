@@ -11,18 +11,12 @@ class BarList extends Component{
 
 
   toggleInfo = (Id) => {
-    console.log('clicked')
-    //this.props.setInfo(Id)
+    this.props.setInfo(Id)
   }
 
   addBarToTrip = (bar) => {
     this.props.addBar(bar)
     this.props.setInfo(0)
-  }
-
-  filterBars = (e, filter) => {
-      this.props.setFilter(filter.value, this.props.bars.bars)
-      // z = _.intersection(arr1, arr2)
   }
 
   listOfBars = () =>{
@@ -32,13 +26,16 @@ class BarList extends Component{
   render(){
     console.log('Bar list props', this.props)
     return(
-      <Segment raised style={{height: `500px`, overflowY: 'scroll'}} >
+      <Segment inverted color='red' raised style={{height: `500px`, overflowY: 'scroll'}} >
         <Header as='h3'><Icon name='thermometer empty'/></Header>
-        <List>
-          {testBars.map(bar => <Segment><List.Item onClick={() => this.toggleInfo(bar.id)}>
+        {!this.props.showInfo.showInfo ? <List>
+          {this.listOfBars().map(bar => <Segment><List.Item onClick={() => this.toggleInfo(bar.id)}>
             {bar.name}
           </List.Item></Segment>)}
-        </List>
+        </List> : <BarCard toggleInfo={this.toggleInfo}
+          addBarToTrip={this.addBarToTrip}
+          currentBar={this.props.currentBar}
+          bars={this.listOfBars()}/> }
       </Segment>
     )
   }

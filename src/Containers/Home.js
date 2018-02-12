@@ -15,7 +15,7 @@ import Directions from '../Components/Directions';
 
 
 class Home extends Component {
-
+  //
   // componentDidMount = () => {
   //   if (navigator.geolocation) {
   //       navigator.geolocation.getCurrentPosition((position) => {
@@ -24,6 +24,10 @@ class Home extends Component {
   //   }
   // }
 
+  filterBars = (e, filter) => {
+      this.props.setFilter(filter.value, this.props.bars.bars)
+      // z = _.intersection(arr1, arr2)
+  }
 
   restart = () => {
     this.props.restartTrip()
@@ -34,7 +38,7 @@ class Home extends Component {
 
     return(
       <div className='row'>
-        <Segment inverted color='red'>
+        <Segment >
           <Row>
             <Col s={12} m={8}><TripContainer /></Col>
             <Col s={12} m={4}><BarFilter

@@ -11,7 +11,7 @@ const BarFilter = ({bars, filterBars}) => {
   return (
     <div>
       <Container >
-        <Segment textAlign='center' raised>
+        <Segment textAlign='center' raised inverted color='red'>
           <Header as='h2' textAlign='center'>
             <Icon name='cocktail' />
             <Header.Content>Bar Filter</Header.Content>
