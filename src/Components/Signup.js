@@ -19,7 +19,7 @@ class Signup extends Component {
     if(this.state.username !== '' && this.state.age !== '' && this.state.password){
       this.props.createUser(this.state, this.props.history)
     } else {
-      this.setState({error: 'Please fill in all fields'})
+      this.setState({errors: 'Please fill in all fields'})
     }
   }
 
@@ -44,7 +44,7 @@ class Signup extends Component {
                 <label>Password</label>
                 <input type='password' placeholder='password' name='password' value={password} onChange={this.handleChange} />
               </Form.Field>
-              {this.state.error !== '' ? <Message header={this.state.error} icon='cancel' size='tiny' color='yellow'/>  : null}
+              {this.state.errors !== '' ? <Message header={this.state.errors} icon='cancel' size='tiny' color='yellow'/>  : null}
               <Form.Field>
                 <Button type='submit' animated='fade' color='blue' disabled={isLoading}>
                   <Button.Content visible>Sign Up!</Button.Content>
