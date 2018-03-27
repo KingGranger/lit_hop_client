@@ -34,6 +34,7 @@ class Home extends Component {
   }
 
   filterBars = (e, filter) => {
+      // console.log('filter', filter.value, this.props.bars.bars)
       this.props.setFilter(filter.value, this.props.bars.bars)
       // z = _.intersection(arr1, arr2)
   }
@@ -43,7 +44,7 @@ class Home extends Component {
   }
 
   render(){
-    //console.log('home props', this.props)
+    console.log('home props', this.props)
 
     return(
       <div className='row'>

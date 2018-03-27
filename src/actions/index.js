@@ -45,6 +45,7 @@ export const setLocation = (lat, lng) => {
   return dispatch => {
     dispatch({type: 'SET_LOCATION', payload: { lat, lng }});
     api.auth.sendLocation(lat, lng).then(data => {
+      console.log(data)
     dispatch(setBars(data))
   })}
 }

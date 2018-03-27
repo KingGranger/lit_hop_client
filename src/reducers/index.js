@@ -43,7 +43,8 @@ const filterReducer = (state = initialFilter, action) => {
     case 'FILTER_BARS':
       const newBars = action.payload.bars.filter(bar => {
         for(let i = 0; i < action.payload.filters.length; i++){
-          if(bar.types.includes(action.payload.filters[i])){
+          // console.log(action.payload.filters[i], bar.types)
+          if(bar.types.includes(action.payload.filters[i].replace(/ /g,"_"))){
             return true;
           }
         }
