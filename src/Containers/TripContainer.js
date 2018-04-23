@@ -27,7 +27,6 @@ class TripContainer extends Component {
   }
 
   render(){
-    console.log('trip props', this.props)
     return(
       <div className='trip-row'>
         <Grid>

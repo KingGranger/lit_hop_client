@@ -4,13 +4,6 @@ import { compose, withProps, withStateHandlers} from 'recompose';
 
 export const MyMapComponent = compose(
 
-  withStateHandlers(() => ({
-    isOpen: false,
-  }), {
-    onToggleOpen: ({ isOpen }) => () => ({
-      isOpen: !isOpen,
-    })
-  }),
   withScriptjs,
   withGoogleMap
   )((props) =>  {

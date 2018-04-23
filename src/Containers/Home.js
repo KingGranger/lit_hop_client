@@ -25,6 +25,7 @@ class Home extends Component {
   // }
 
   filterBars = (e, filter) => {
+      // console.log('filter', filter.value, this.props.bars.bars)
       this.props.setFilter(filter.value, this.props.bars.bars)
       // z = _.intersection(arr1, arr2)
   }
@@ -57,7 +58,8 @@ class Home extends Component {
                 onJourney={this.props.onJourney}
                 restart={this.restart}
                 trips={this.props.trips}/>}</Col>
-            <Col s={6}>{!this.props.onJourney ? <MyMapComponent
+            <Col s={6}>{!this.props.onJourney ?
+                <MyMapComponent
               currentBar={this.props.currentBarId}
               toggleInfo={this.toggleInfo}
               showInfo={this.props.showInfo.showInfo}
@@ -67,7 +69,8 @@ class Home extends Component {
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{height: `500px`}}/>}
               mapElement={<div style={{height: `100%`, width: `100%`}}/>}
-              /> : <JourneyMap
+              />
+            : <JourneyMap
               trips={this.props.trips}
               startPosition={this.props.position}/>}
             </Col>
