@@ -45,6 +45,7 @@ class Signup extends Component {
                 <input type='password' placeholder='password' name='password' value={password} onChange={this.handleChange} />
               </Form.Field>
               {this.state.errors !== '' ? <Message header={this.state.errors} icon='cancel' size='tiny' color='yellow'/>  : null}
+
               <Form.Field>
                 <Button type='submit' animated='fade' color='blue' disabled={isLoading}>
                   <Button.Content visible>Sign Up!</Button.Content>
