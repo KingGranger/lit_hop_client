@@ -72,6 +72,12 @@ export const setJourney = (start, end, trips) => {
   }
 }
 
+export const setReview = (title, content) => {
+  return dispatch => {
+    api.auth.createReview(title, content).then(data => console.log(data))
+  }
+}
+
 const setTrips = (journey, trips) => {
   return {type: 'SET_TRIPS', payload: trips}
 }

@@ -15,23 +15,14 @@ import Directions from '../Components/Directions';
 
 
 class Home extends Component {
-
-  componentDidMount = () => {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          this.props.setLocation(position.coords.latitude, position.coords.longitude)
-        });
-    }
-  }
-
-  toggleInfo = (Id) => {
-    this.props.setInfo(Id)
-  }
-
-  addBarToTrip = (bar) => {
-    this.props.addBar(bar)
-    this.props.setInfo(0)
-  }
+  //
+  // componentDidMount = () => {
+  //   if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition((position) => {
+  //         this.props.setLocation(position.coords.latitude, position.coords.longitude)
+  //       });
+  //   }
+  // }
 
   filterBars = (e, filter) => {
       // console.log('filter', filter.value, this.props.bars.bars)
@@ -48,7 +39,7 @@ class Home extends Component {
 
     return(
       <div className='row'>
-        <Segment inverted color='red'>
+        <Segment >
           <Row>
             <Col s={12} m={8}><TripContainer /></Col>
             <Col s={12} m={4}><BarFilter

@@ -4,7 +4,7 @@ import { List, Segment, Header, Icon, Card, Button } from 'semantic-ui-react';
 const Directions = ({trips, restart, onJourney}) => {
   const tripsToLoops = onJourney ? trips.slice(1,trips.length) : trips
   return(
-    <Segment raised style={{height: `500px`}}>
+    <Segment raised style={{height: `500px`}} inverted color='red'>
       <Header as='h3'><Icon name='thermometer full'/></Header>
       <Card centered raised>
         <Card.Content>
