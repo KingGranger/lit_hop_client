@@ -25,10 +25,12 @@ const NavBar = ({logout, history, loggedIn, username}) => {
           <Dropdown trigger={
 		        <Button className='light-blue accent-3'>{username}</Button>
 	         }>
-           <NavItem><Icon left>person</Icon>Profile</NavItem>
+            <NavItem><Icon left>home</Icon>Home</NavItem>
+            <NavItem><Icon left>person</Icon>Profile</NavItem>
             <NavItem divider/>
             <NavItem><Icon left>grade</Icon>Adventure</NavItem>
             <NavItem divider/>
+            <NavItem divider />
             <NavItem onClick={()=>logout(history)}><Icon left>person_outline</Icon>Sign Out</NavItem>
           </Dropdown>
 	         : null}

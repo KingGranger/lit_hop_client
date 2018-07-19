@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000/api/v1'
+const baseUrl = 'https://lit-hop-api.herokuapp.com/api/v1'
 
 function getHeaders() {
   const token = localStorage.getItem('token');
@@ -16,7 +16,7 @@ const signup = (username, password, age) => {
     headers: getHeaders(),
     body: JSON.stringify({username, password, age})
   }
-  return fetch('http://localhost:3000/api/v1/users', newUser)
+  return fetch(`${baseUrl}/users`, newUser)
   .then(res => res.json());
 }
 
