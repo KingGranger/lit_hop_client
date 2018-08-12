@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
-import 'semantic-ui-css/semantic.min.css';
 import { Provider } from 'react-redux';
 import store from './configStore';
+import 'semantic-ui-css/semantic.min.css';
 
 
 

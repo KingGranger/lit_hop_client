@@ -15,14 +15,14 @@ import Directions from '../Components/Directions';
 
 
 class Home extends Component {
-  //
-  // componentDidMount = () => {
-  //   if (navigator.geolocation) {
-  //       navigator.geolocation.getCurrentPosition((position) => {
-  //         this.props.setLocation(position.coords.latitude, position.coords.longitude)
-  //       });
-  //   }
-  // }
+  
+  componentDidMount = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.props.setLocation(position.coords.latitude, position.coords.longitude)
+        });
+    }
+  }
 
   filterBars = (e, filter) => {
       // console.log('filter', filter.value, this.props.bars.bars)

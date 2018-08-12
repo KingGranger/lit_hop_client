@@ -1,4 +1,5 @@
-const baseUrl = 'https://lit-hop-api.herokuapp.com/api/v1'
+const baseUrl = 'http://localhost:3000/api/v1'
+// 'https://lit-hop-api.herokuapp.com/api/v1'
 
 function getHeaders() {
   const token = localStorage.getItem('token');
